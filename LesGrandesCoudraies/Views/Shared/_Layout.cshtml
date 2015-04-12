@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/authenticate")
+    @Scripts.Render("~/bundles/bootstrap")
+    <link href="@(ViewBag.RootDomain)Content/SectionCommon.css" rel="stylesheet"></link>
+    <link href="@(ViewBag.RootDomain)Content/Section@(ViewBag.Config).css" rel="stylesheet"></link>
+</head>
+<body style="height:100%">
+    <script>
+        $(function () {
+            var authentication = new Authentication();
+            authentication.Initialize();
+        });
+    </script>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Les grandes coudraies", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actualités <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Travaux en cours</a></li>
+                            <li><a href="#">Les projets</a></li>
+                            <li><a href="#">Vos suggestions</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Syndic <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Les documents</a></li>
+                            <li><a href="#">Les contacts</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Les coudraies <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Présentation</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container" style="height:25%;">
+        <div class="row" style="height:100%;">
+            <div class="col-lg-12 col-md-12 colWelcome">
+                <div style="height:100%; background-image:url('@(ViewBag.RootDomain)Images/Bandeau@(ViewBag.Config).jpg');background-size: 100% 100%; background-repeat: no-repeat;  ">
+                    <div style="display:table; width:100%; height:100%; ">
+                        <div style="display:table-cell; font-family:Arial; font-size:3em; font-weight:900;vertical-align:middle; padding-right:10px;">
+                            <span class="SectionTitle" style="float:right;">@ViewBag.SectionName</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container body-content" style="height:75%;">
+        <div class="row" style="height:100%;">
+            <div class="col-lg-2 MenuSectionBackground" style="height:100%;">
+                <ul class="nav nav-pills nav-stacked MenuSection">
+                    @foreach (var item in ViewBag.MenuItems)
+                    {
+                        <li class="MenuSectionItem">
+                            <a href="#">@item.Name</a>
+                        </li>
+                    }
+                </ul>
+                @*<ul class="nav nav-pills nav-stacked MenuSection">
+                            <a href="#">One</a>
+                        </li>
+                        <li class="active MenuSectionItem">
+                            <a href="#">Two</a>
+                        </li>
+                        <li class="MenuSectionItem">
+                            <a href="#">Three</a>
+                        </li>
+                    </ul>*@
+            </div>
+            <div class="col-lg-10">
+                @RenderBody()
+            </div>
+        </div>
+
+        <hr />
+        <footer></footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+</html>

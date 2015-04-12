@@ -1,0 +1,13 @@
+26/07/2014 23:31:04	Ce journal contient des informations sur l'importation du script 'Model.edmx.sql' dans le projet 'SQLDatabaseProj' sur l'ordinateur 'OFFICE-WIN8' par l'utilisateur 'Samuel.
+26/07/2014 23:31:04	Début de l'importation du fichier : D:\Projets\LesGrandesCoudraies\LesGrandesCoudraies\Models\Model.edmx.sql 
+26/07/2014 23:31:04	Nom de fichier D:\Projets\LesGrandesCoudraies\LesGrandesCoudraies\Models\Model.edmx.sql (taille : 3743)
+26/07/2014 23:31:04	Analyse du script d'importation
+26/07/2014 23:31:04	Nombre total de lots dans le script : 19
+26/07/2014 23:31:04	Nombre total d'instructions dans le script : 10
+26/07/2014 23:31:04	Le script a été correctement importé dans le projet.
+26/07/2014 23:31:04	Analyse des objets de schéma...
+26/07/2014 23:31:04	Analyse du projet à la recherche des éléments en double
+26/07/2014 23:31:04	Fin du traitement des éléments en double
+26/07/2014 23:31:05	Dans le script que vous avez fourni à l'opération d'importation, une ou plusieurs instructions n'ont pas été totalement comprises. Elles ont été déplacées vers le fichier ScriptsIgnoredOnImport.sql. Pour plus d'informations, examinez le contenu du fichier.
+26/07/2014 23:31:05	Un résumé de l'opération d'importation a été enregistré à l'emplacement suivant : D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\Importer les journaux de scripts\Model_edmx_sql_20140726093104.log.
+26/07/2014 23:31:05	Cliquez sur Terminer pour continuer...

@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="ArticleSet" EntityType="Model.Store.ArticleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="Model.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleSet" EntityType="Model.Store.RoleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentSet" EntityType="Model.Store.CommentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VoteSet" EntityType="Model.Store.VoteSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MenuSet" EntityType="Model.Store.MenuSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="Model.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleSetRole" EntityType="Model.Store.ArticleSetRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UserRole_User" Association="Model.Store.FK_UserRole_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="Model.Store.FK_UserRole_Role">
+      <End Role="Role" EntitySet="RoleSet" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleSetUser" Association="Model.Store.ArticleSetUser">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleSetRole_ArticleSet" Association="Model.Store.FK_ArticleSetRole_ArticleSet">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="ArticleSetRole" EntitySet="ArticleSetRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleSetRole_Role" Association="Model.Store.FK_ArticleSetRole_Role">
+      <End Role="Role" EntitySet="RoleSet" />
+      <End Role="ArticleSetRole" EntitySet="ArticleSetRole" />
+    </AssociationSet>
+    <AssociationSet Name="CommentUser" Association="Model.Store.CommentUser">
+      <End Role="Comment" EntitySet="CommentSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="CommentArticleSet" Association="Model.Store.CommentArticleSet">
+      <End Role="Comment" EntitySet="CommentSet" />
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleSetVote" Association="Model.Store.ArticleSetVote">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="Vote" EntitySet="VoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserVote" Association="Model.Store.UserVote">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Vote" EntitySet="VoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="MenuArticle" Association="Model.Store.MenuArticle">
+      <End Role="Menu" EntitySet="MenuSet" />
+      <End Role="Article" EntitySet="ArticleSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArticleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Content" Type="varbinary(max)" Nullable="false" />
+    <Property Name="DateArticle" Type="datetime" Nullable="false" />
+    <Property Name="DateTarget" Type="datetime" Nullable="false" />
+    <Property Name="AllowVote" Type="bit" Nullable="false" />
+    <Property Name="AllowComment" Type="bit" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Building" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apartment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="varbinary(max)" Nullable="false" />
+    <Property Name="DateComment" Type="datetime" Nullable="false" />
+    <Property Name="ArticleSetId" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VoteSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArticleSetId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DateVote" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MenuSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="User_Id" />
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Role_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleSetRole">
+    <Key>
+      <PropertyRef Name="Article_Id" />
+      <PropertyRef Name="AuthorizedRoles_Id" />
+    </Key>
+    <Property Name="Article_Id" Type="int" Nullable="false" />
+    <Property Name="AuthorizedRoles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ArticleSetUser">
+    <End Role="ArticleSet" Type="Model.Store.ArticleSet" Multiplicity="*" />
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleSet">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentUser">
+    <End Role="Comment" Type="Model.Store.CommentSet" Multiplicity="*" />
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentArticleSet">
+    <End Role="Comment" Type="Model.Store.CommentSet" Multiplicity="*" />
+    <End Role="ArticleSet" Type="Model.Store.ArticleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ArticleSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArticleSetVote">
+    <End Role="ArticleSet" Type="Model.Store.ArticleSet" Multiplicity="1" />
+    <End Role="Vote" Type="Model.Store.VoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="ArticleSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserVote">
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="1" />
+    <End Role="Vote" Type="Model.Store.VoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuArticle">
+    <End Role="Menu" Type="Model.Store.MenuSet" Multiplicity="1" />
+    <End Role="Article" Type="Model.Store.ArticleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="1" />
+    <End Role="UserRole" Type="Model.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="UserRole" Type="Model.Store.UserRole" Multiplicity="*" />
+    <End Role="Role" Type="Model.Store.RoleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleSetRole_ArticleSet">
+    <End Role="ArticleSet" Type="Model.Store.ArticleSet" Multiplicity="1" />
+    <End Role="ArticleSetRole" Type="Model.Store.ArticleSetRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleSetRole">
+        <PropertyRef Name="Article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleSetRole_Role">
+    <End Role="ArticleSetRole" Type="Model.Store.ArticleSetRole" Multiplicity="*" />
+    <End Role="Role" Type="Model.Store.RoleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleSetRole">
+        <PropertyRef Name="AuthorizedRoles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

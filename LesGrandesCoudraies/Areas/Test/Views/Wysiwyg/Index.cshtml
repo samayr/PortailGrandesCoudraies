@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/Wysiwyg")
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+</head>
+
+<body>
+    <div class="container">
+        <div class="hero-unit" style="margin-top:40px">
+            <form><textarea id="wysihtml5-textarea" rows="30" cols="500" class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px" autofocus></textarea></form>
+        </div>
+    </div>
+    <script>
+        $('#wysihtml5-textarea').wysihtml5({
+        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": false, //Button which allows you to edit the generated HTML. Default false
+        "link": true, //Button to insert a link. Default true
+        "image": true, //Button to insert an image. Default true,
+        "color": false //Button to change color of font  
+    });
+
+    </script>
+</body>
+</html>

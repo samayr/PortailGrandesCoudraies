@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="17cf552bc826491dbfe3ed3a133d39d9" Name="Security" DisplayType="true" ShowGrid="false">
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.User" Width="1.5" PointX="1.875" PointY="0.75" />
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.Role" Width="1.5" PointX="4.375" PointY="0.75" />
+        <AssociationConnector Association="LesGrandesCoudraiesModel.UserRole" />
+      </Diagram>
+      <Diagram DiagramId="efbc4337d2a74b028e623463e08fa2c7" Name="Referential" />
+      <Diagram DiagramId="451bc95dae3748fc9e7e74af7f7fae00" Name="Content" >
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.Topic" Width="1.5" PointX="2.25" PointY="0.625" />
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.Contribution" Width="1.5" PointX="5" PointY="0.625" />
+        <AssociationConnector Association="LesGrandesCoudraiesModel.ContributionTopic" />
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.Message" Width="1.5" PointX="7.625" PointY="0.5" />
+        <EntityTypeShape EntityType="LesGrandesCoudraiesModel.Vote" Width="1.5" PointX="7.625" PointY="2.875" />
+        <AssociationConnector Association="LesGrandesCoudraiesModel.VoteContribution" />
+        <AssociationConnector Association="LesGrandesCoudraiesModel.ContributionMessage" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

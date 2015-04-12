@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ArticleSet" EntityType="Model.Article" />
+    <EntitySet Name="UserSet" EntityType="Model.User" />
+    <EntitySet Name="RoleSet" EntityType="Model.Role" />
+    <AssociationSet Name="UserRole" Association="Model.UserRole">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Role" EntitySet="RoleSet" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleSetUser" Association="Model.ArticleSetUser">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleSetRole" Association="Model.ArticleSetRole">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="Role" EntitySet="RoleSet" />
+    </AssociationSet>
+    <EntitySet Name="CommentSet" EntityType="Model.Comment" />
+    <AssociationSet Name="CommentUser" Association="Model.CommentUser">
+      <End Role="Comment" EntitySet="CommentSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="CommentArticleSet" Association="Model.CommentArticleSet">
+      <End Role="Comment" EntitySet="CommentSet" />
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+    </AssociationSet>
+    <EntitySet Name="VoteSet" EntityType="Model.Vote" />
+    <AssociationSet Name="ArticleSetVote" Association="Model.ArticleSetVote">
+      <End Role="ArticleSet" EntitySet="ArticleSet" />
+      <End Role="Vote" EntitySet="VoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserVote" Association="Model.UserVote">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Vote" EntitySet="VoteSet" />
+    </AssociationSet>
+    <EntitySet Name="MenuSet" EntityType="Model.Menu" />
+    <AssociationSet Name="MenuArticle" Association="Model.MenuArticle">
+      <End Role="Menu" EntitySet="MenuSet" />
+      <End Role="Article" EntitySet="ArticleSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Owner" Relationship="Model.ArticleSetUser" FromRole="ArticleSet" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AuthorizedRoles" Relationship="Model.ArticleSetRole" FromRole="ArticleSet" ToRole="Role" />
+    <Property Name="Summary" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Content" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Comment" Relationship="Model.CommentArticleSet" FromRole="ArticleSet" ToRole="Comment" />
+    <NavigationProperty Name="Vote" Relationship="Model.ArticleSetVote" FromRole="ArticleSet" ToRole="Vote" />
+    <Property Name="DateArticle" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateTarget" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AllowVote" Type="Boolean" Nullable="false" />
+    <Property Name="AllowComment" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Menu" Relationship="Model.MenuArticle" FromRole="Article" ToRole="Menu" />
+    <Property Name="MenuId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Building" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Apartment" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Role" Relationship="Model.UserRole" FromRole="User" ToRole="Role" />
+    <NavigationProperty Name="ArticleSet" Relationship="Model.ArticleSetUser" FromRole="User" ToRole="ArticleSet" />
+    <NavigationProperty Name="Comment" Relationship="Model.CommentUser" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="Vote" Relationship="Model.UserVote" FromRole="User" ToRole="Vote" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="Model.UserRole" FromRole="Role" ToRole="User" />
+    <NavigationProperty Name="Article" Relationship="Model.ArticleSetRole" FromRole="Role" ToRole="ArticleSet" />
+  </EntityType>
+  <Association Name="UserRole">
+    <End Type="Model.User" Role="User" Multiplicity="*" />
+    <End Type="Model.Role" Role="Role" Multiplicity="*" />
+  </Association>
+  <Association Name="ArticleSetUser">
+    <End Type="Model.Article" Role="ArticleSet" Multiplicity="*" />
+    <End Type="Model.User" Role="User" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleSet">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArticleSetRole">
+    <End Type="Model.Article" Role="ArticleSet" Multiplicity="*" />
+    <End Type="Model.Role" Role="Role" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="Model.CommentUser" FromRole="Comment" ToRole="User" />
+    <Property Name="Content" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="DateComment" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Article" Relationship="Model.CommentArticleSet" FromRole="Comment" ToRole="ArticleSet" />
+    <Property Name="ArticleSetId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="CommentUser">
+    <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+    <End Type="Model.User" Role="User" Multiplicity="1" />
+  </Association>
+  <Association Name="CommentArticleSet">
+    <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+    <End Type="Model.Article" Role="ArticleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ArticleSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Vote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Article" Relationship="Model.ArticleSetVote" FromRole="Vote" ToRole="ArticleSet" />
+    <Property Name="ArticleSetId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Model.UserVote" FromRole="Vote" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="DateVote" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="ArticleSetVote">
+    <End Type="Model.Article" Role="ArticleSet" Multiplicity="1" />
+    <End Type="Model.Vote" Role="Vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="ArticleSetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserVote">
+    <End Type="Model.User" Role="User" Multiplicity="1" />
+    <End Type="Model.Vote" Role="Vote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Article" Relationship="Model.MenuArticle" FromRole="Menu" ToRole="Article" />
+  </EntityType>
+  <Association Name="MenuArticle">
+    <End Type="Model.Menu" Role="Menu" Multiplicity="1" />
+    <End Type="Model.Article" Role="Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

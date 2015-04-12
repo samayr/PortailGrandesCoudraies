@@ -1,0 +1,79 @@
+﻿html {
+    perspective: 500px;
+}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    /*CSS3 keyframes animation*/
+    /*animation-name: rotateInLeft;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.bckKaki{
+    background-color: #666633;
+}
+
+.bckLightGrey{
+    background-color: #DED7D4;
+}
+
+.bckYellow {
+    background-color: #FFC000;
+}
+
+.bckDarkGrey{
+    background-color: #595959;
+}
+
+.bckBlack{
+    background-color: #000000;
+}
+
+/* Style Page d'accueil*/
+.colWelcome {
+    height:100%; 
+    padding-right:3px; 
+    padding-left:3px;
+}
+.linkWelcome {
+    vertical-align:middle; 
+    display:table-cell; 
+    font-family:Arial; 
+    font-size:2.0em; 
+    font-weight:700;
+}
+.linkWelcomContainer {
+    height:49%; 
+    width:100%; 
+    margin-bottom:3%; 
+    text-align:center; 
+    display:table;
+    cursor:pointer;
+}
+
+@keyframes rotateInLeft {
+from {
+     transform-origin: 0% 0%;
+     transform: rotateY(180deg);
+     }
+to {
+   transform-origin: 0% 0%;
+   transform: rotateY(0deg);
+   }
+}

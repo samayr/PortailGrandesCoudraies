@@ -1,0 +1,28 @@
+﻿.SectionTitle{
+}
+.MenuSectionBackground{
+    padding-left:0px;
+    padding-right:0px;
+}
+.MenuSectionItem{
+    width:100%;
+    padding-left:0px;
+    padding-right:0px;
+}
+.MenuSectionItem div{
+    color:#ffffff;
+    font-family:Arial;
+    font-size:2em;
+    font-weight:500;
+    margin-bottom:10px;
+    padding-left:3px;
+}
+.MenuSection{
+    list-style-type: none;
+    margin: 0px;
+    width:100%;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}

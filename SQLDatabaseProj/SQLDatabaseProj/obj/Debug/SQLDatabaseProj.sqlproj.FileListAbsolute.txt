@@ -1,0 +1,5 @@
+D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.dacpac
+D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.dll
+D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.pdb
+D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\SQLDatabaseProj.dll
+D:\Projets\LesGrandesCoudraies\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\SQLDatabaseProj.pdb

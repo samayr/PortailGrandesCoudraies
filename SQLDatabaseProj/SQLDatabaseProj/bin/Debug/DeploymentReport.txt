@@ -1,0 +1,21 @@
+﻿** Met en surbrillance
+     Tables à reconstruire
+       Aucun
+     Index ordonnés en clusters à supprimer
+       Aucun
+     Index ordonnés en clusters à créer.
+       Aucun
+     Problèmes de données possibles
+       Aucun
+
+** Actions de l'utilisateur
+     Créer
+       [dbo].[ArticleSet] (Table)
+       [dbo].[ArticleSet].[IX_FK_MenuItemArticle] (Index)
+       [dbo].[MenuItemSet] (Table)
+       [dbo].[MenuItemSet].[IX_FK_SectionMenuItem] (Index)
+       [dbo].[SectionSet] (Table)
+       [dbo].[FK_MenuItemArticle] (Clé étrangère)
+       [dbo].[FK_SectionMenuItem] (Clé étrangère)
+
+** Actions de support

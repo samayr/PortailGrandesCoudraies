@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LesGrandesCoudraiesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="LesGrandesCoudraiesModelStoreContainer">
+    <EntitySet Name="Users" EntityType="LesGrandesCoudraiesModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="LesGrandesCoudraiesModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Topics" EntityType="LesGrandesCoudraiesModel.Store.Topics" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contributions" EntityType="LesGrandesCoudraiesModel.Store.Contributions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="LesGrandesCoudraiesModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Votes" EntityType="LesGrandesCoudraiesModel.Store.Votes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="LesGrandesCoudraiesModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TopicRole" EntityType="LesGrandesCoudraiesModel.Store.TopicRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContributionRole" EntityType="LesGrandesCoudraiesModel.Store.ContributionRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UserRole_User" Association="LesGrandesCoudraiesModel.Store.FK_UserRole_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="LesGrandesCoudraiesModel.Store.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TopicRole_Topic" Association="LesGrandesCoudraiesModel.Store.FK_TopicRole_Topic">
+      <End Role="Topic" EntitySet="Topics" />
+      <End Role="TopicRole" EntitySet="TopicRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TopicRole_Role" Association="LesGrandesCoudraiesModel.Store.FK_TopicRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="TopicRole" EntitySet="TopicRole" />
+    </AssociationSet>
+    <AssociationSet Name="ContributionTopic" Association="LesGrandesCoudraiesModel.Store.ContributionTopic">
+      <End Role="Contribution" EntitySet="Contributions" />
+      <End Role="Topic" EntitySet="Topics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContributionRole_Contribution" Association="LesGrandesCoudraiesModel.Store.FK_ContributionRole_Contribution">
+      <End Role="Contribution" EntitySet="Contributions" />
+      <End Role="ContributionRole" EntitySet="ContributionRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContributionRole_Role" Association="LesGrandesCoudraiesModel.Store.FK_ContributionRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="ContributionRole" EntitySet="ContributionRole" />
+    </AssociationSet>
+    <AssociationSet Name="VoteContribution" Association="LesGrandesCoudraiesModel.Store.VoteContribution">
+      <End Role="Vote" EntitySet="Votes" />
+      <End Role="Contribution" EntitySet="Contributions" />
+    </AssociationSet>
+    <AssociationSet Name="VoteUser" Association="LesGrandesCoudraiesModel.Store.VoteUser">
+      <End Role="Vote" EntitySet="Votes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ContributionMessage" Association="LesGrandesCoudraiesModel.Store.ContributionMessage">
+      <End Role="Contribution" EntitySet="Contributions" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="UserMessage" Association="LesGrandesCoudraiesModel.Store.UserMessage">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Topics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contributions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TopicId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContributionId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Votes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContributionId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="User_Id" />
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Role_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TopicRole">
+    <Key>
+      <PropertyRef Name="Topic_Id" />
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Topic_Id" Type="int" Nullable="false" />
+    <Property Name="Role_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContributionRole">
+    <Key>
+      <PropertyRef Name="Contribution_Id" />
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Contribution_Id" Type="int" Nullable="false" />
+    <Property Name="Role_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ContributionTopic">
+    <End Role="Contribution" Type="LesGrandesCoudraiesModel.Store.Contributions" Multiplicity="*" />
+    <End Role="Topic" Type="LesGrandesCoudraiesModel.Store.Topics" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contribution">
+        <PropertyRef Name="TopicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VoteContribution">
+    <End Role="Vote" Type="LesGrandesCoudraiesModel.Store.Votes" Multiplicity="*" />
+    <End Role="Contribution" Type="LesGrandesCoudraiesModel.Store.Contributions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Contribution">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="ContributionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VoteUser">
+    <End Role="Vote" Type="LesGrandesCoudraiesModel.Store.Votes" Multiplicity="*" />
+    <End Role="User" Type="LesGrandesCoudraiesModel.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vote">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContributionMessage">
+    <End Role="Contribution" Type="LesGrandesCoudraiesModel.Store.Contributions" Multiplicity="1" />
+    <End Role="Message" Type="LesGrandesCoudraiesModel.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contribution">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="ContributionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserMessage">
+    <End Role="User" Type="LesGrandesCoudraiesModel.Store.Users" Multiplicity="1" />
+    <End Role="Message" Type="LesGrandesCoudraiesModel.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="LesGrandesCoudraiesModel.Store.Users" Multiplicity="1" />
+    <End Role="UserRole" Type="LesGrandesCoudraiesModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="UserRole" Type="LesGrandesCoudraiesModel.Store.UserRole" Multiplicity="*" />
+    <End Role="Role" Type="LesGrandesCoudraiesModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TopicRole_Topic">
+    <End Role="Topic" Type="LesGrandesCoudraiesModel.Store.Topics" Multiplicity="1" />
+    <End Role="TopicRole" Type="LesGrandesCoudraiesModel.Store.TopicRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TopicRole">
+        <PropertyRef Name="Topic_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TopicRole_Role">
+    <End Role="TopicRole" Type="LesGrandesCoudraiesModel.Store.TopicRole" Multiplicity="*" />
+    <End Role="Role" Type="LesGrandesCoudraiesModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TopicRole">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContributionRole_Contribution">
+    <End Role="Contribution" Type="LesGrandesCoudraiesModel.Store.Contributions" Multiplicity="1" />
+    <End Role="ContributionRole" Type="LesGrandesCoudraiesModel.Store.ContributionRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contribution">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContributionRole">
+        <PropertyRef Name="Contribution_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContributionRole_Role">
+    <End Role="ContributionRole" Type="LesGrandesCoudraiesModel.Store.ContributionRole" Multiplicity="*" />
+    <End Role="Role" Type="LesGrandesCoudraiesModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContributionRole">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LesGrandesCoudraiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LesGrandesCoudraiesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="LesGrandesCoudraiesModel.User" />
+          <EntitySet Name="Roles" EntityType="LesGrandesCoudraiesModel.Role" />
+          <AssociationSet Name="UserRole" Association="LesGrandesCoudraiesModel.UserRole">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="Topics" EntityType="LesGrandesCoudraiesModel.Topic" />
+          <EntitySet Name="Contributions" EntityType="LesGrandesCoudraiesModel.Contribution" />
+          <AssociationSet Name="TopicRole" Association="LesGrandesCoudraiesModel.TopicRole">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="ContributionTopic" Association="LesGrandesCoudraiesModel.ContributionTopic">
+            <End Role="Contribution" EntitySet="Contributions" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="ContributionRole" Association="LesGrandesCoudraiesModel.ContributionRole">
+            <End Role="Contribution" EntitySet="Contributions" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="Messages" EntityType="LesGrandesCoudraiesModel.Message" />
+          <EntitySet Name="Votes" EntityType="LesGrandesCoudraiesModel.Vote" />
+          <AssociationSet Name="VoteContribution" Association="LesGrandesCoudraiesModel.VoteContribution">
+            <End Role="Vote" EntitySet="Votes" />
+            <End Role="Contribution" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="VoteUser" Association="LesGrandesCoudraiesModel.VoteUser">
+            <End Role="Vote" EntitySet="Votes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ContributionMessage" Association="LesGrandesCoudraiesModel.ContributionMessage">
+            <End Role="Contribution" EntitySet="Contributions" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="UserMessage" Association="LesGrandesCoudraiesModel.UserMessage">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="LesGrandesCoudraiesModel.UserRole" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Vote" Relationship="LesGrandesCoudraiesModel.VoteUser" FromRole="User" ToRole="Vote" />
+          <NavigationProperty Name="Message" Relationship="LesGrandesCoudraiesModel.UserMessage" FromRole="User" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="LesGrandesCoudraiesModel.UserRole" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="Topic" Relationship="LesGrandesCoudraiesModel.TopicRole" FromRole="Role" ToRole="Topic" />
+          <NavigationProperty Name="Contribution" Relationship="LesGrandesCoudraiesModel.ContributionRole" FromRole="Role" ToRole="Contribution" />
+        </EntityType>
+        <Association Name="UserRole">
+          <End Type="LesGrandesCoudraiesModel.User" Role="User" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="LesGrandesCoudraiesModel.TopicRole" FromRole="Topic" ToRole="Role" />
+          <NavigationProperty Name="Contribution" Relationship="LesGrandesCoudraiesModel.ContributionTopic" FromRole="Topic" ToRole="Contribution" />
+        </EntityType>
+        <EntityType Name="Contribution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" />
+          <Property Name="Content" Type="String" Nullable="false" />
+          <NavigationProperty Name="Topic" Relationship="LesGrandesCoudraiesModel.ContributionTopic" FromRole="Contribution" ToRole="Topic" />
+          <Property Name="TopicId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="LesGrandesCoudraiesModel.ContributionRole" FromRole="Contribution" ToRole="Role" />
+          <NavigationProperty Name="Vote" Relationship="LesGrandesCoudraiesModel.VoteContribution" FromRole="Contribution" ToRole="Vote" />
+          <NavigationProperty Name="Message" Relationship="LesGrandesCoudraiesModel.ContributionMessage" FromRole="Contribution" ToRole="Message" />
+        </EntityType>
+        <Association Name="TopicRole">
+          <End Type="LesGrandesCoudraiesModel.Topic" Role="Topic" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <Association Name="ContributionTopic">
+          <End Type="LesGrandesCoudraiesModel.Contribution" Role="Contribution" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.Topic" Role="Topic" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contribution">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContributionRole">
+          <End Type="LesGrandesCoudraiesModel.Contribution" Role="Contribution" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contribution" Relationship="LesGrandesCoudraiesModel.ContributionMessage" FromRole="Message" ToRole="Contribution" />
+          <Property Name="ContributionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="LesGrandesCoudraiesModel.UserMessage" FromRole="Message" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contribution" Relationship="LesGrandesCoudraiesModel.VoteContribution" FromRole="Vote" ToRole="Contribution" />
+          <Property Name="ContributionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="LesGrandesCoudraiesModel.VoteUser" FromRole="Vote" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="VoteContribution">
+          <End Type="LesGrandesCoudraiesModel.Vote" Role="Vote" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.Contribution" Role="Contribution" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Contribution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ContributionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VoteUser">
+          <End Type="LesGrandesCoudraiesModel.Vote" Role="Vote" Multiplicity="*" />
+          <End Type="LesGrandesCoudraiesModel.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContributionMessage">
+          <End Type="LesGrandesCoudraiesModel.Contribution" Role="Contribution" Multiplicity="1" />
+          <End Type="LesGrandesCoudraiesModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contribution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ContributionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserMessage">
+          <End Type="LesGrandesCoudraiesModel.User" Role="User" Multiplicity="1" />
+          <End Type="LesGrandesCoudraiesModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LesGrandesCoudraiesModelStoreContainer" CdmEntityContainer="LesGrandesCoudraiesEntities1">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.Topic)">
+        <MappingFragment StoreEntitySet="Topics">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contributions">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.Contribution)">
+        <MappingFragment StoreEntitySet="Contributions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.Message)">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ContributionId" ColumnName="ContributionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Votes">
+      <EntityTypeMapping TypeName="IsTypeOf(LesGrandesCoudraiesModel.Vote)">
+        <MappingFragment StoreEntitySet="Votes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ContributionId" ColumnName="ContributionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserRole" TypeName="LesGrandesCoudraiesModel.UserRole" StoreEntitySet="UserRole">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Id" ColumnName="Role_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TopicRole" TypeName="LesGrandesCoudraiesModel.TopicRole" StoreEntitySet="TopicRole">
+      <EndProperty Name="Topic">
+        <ScalarProperty Name="Id" ColumnName="Topic_Id" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Id" ColumnName="Role_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ContributionRole" TypeName="LesGrandesCoudraiesModel.ContributionRole" StoreEntitySet="ContributionRole">
+      <EndProperty Name="Contribution">
+        <ScalarProperty Name="Id" ColumnName="Contribution_Id" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Id" ColumnName="Role_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="dbo" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
